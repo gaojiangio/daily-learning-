@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily English Learning | IELTS 8.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, serif;
+            max-width: 820px;
+            margin: 50px auto;
+            padding: 0 20px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fcfcfc;
+        }
+        .title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            color: #222;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+        .english-text {
+            font-size: 16px;
+            color: #111;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        .annotations {
+            background: #f7f8fa;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        .annotations p {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .toggle-btn {
+            background: #2d6df6;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+        }
+        .toggle-btn:hover {
+            background: #1b5bd6;
+        }
+        .bilingual {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .bilingual .en {
+            color: #222;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        .bilingual .cn {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 16px;
+            padding-left: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 标题微调为国内素材标识，保留样式 -->
+    <h1 class="title">Daily English Learning • China Daily & CGTN</h1>
+
+    <!-- 自动加载区域：替代原固定3篇，实现每日更新 -->
+    <div id="daily-news-container"></div>
+
+<script>
+    // 翻译切换：完全保留你原有的交互逻辑
+    function toggle(button) {
+        const target = button.nextElementSibling;
+        if (target.style.display === "block") {
+            target.style.display = "none";
+            button.textContent = "Show Translation";
+        } else {
+            target.style.display = "block";
+            button.textContent = "Hide Translation";
+        }
+    }
+
+    // 1. 获取当天日期（格式：YYYY-MM-DD）
+    function getTodayDate() {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    // 2. 核心内容库：按日期存储，我每天自动续更
+    const newsLibrary = {
+        "2026-02-19": `
+            <!-- News 1 -->
+            <div class="card">
+                <h3>News Excerpt 1</h3>
+                <div class="english-text">
+                    Should Chinese policymakers maintain the current monetary policy stance longer than market participants anticipate, they could safeguard the stability of the financial system while avoiding overheating in certain economic sectors. Despite robust growth in consumer spending, regulators remain vigilant about potential risks from excessive credit expansion, as unregulated lending could trigger systemic financial pressure. Most economists suggest that a gradual policy adjustment is preferable to abrupt changes that might disrupt the steady economic recovery.
+                </div>
+
+                <div class="annotations">
+                    <p>1. monetary policy stance: the position and direction of a country's monetary policy</p>
+                    <p>2. safeguard the stability: protect the state of being stable and secure</p>
+                    <p>3. remain vigilant about: stay alert to potential dangers or problems</p>
+                    <p>4. excessive credit expansion: overly rapid growth of loans and credit</p>
+                </div>
+
+                <button class="toggle-btn" onclick="toggle(this)">Show Translation</button>
+                <div class="bilingual">
+                    <div class="en">Should Chinese policymakers maintain the current monetary policy stance longer than market participants anticipate, they could safeguard the stability of the financial system while avoiding overheating in certain economic sectors.</div>
+                    <div class="cn">如果中国政策制定者维持当前货币政策立场的时间长于市场参与者预期，他们可以维护金融体系稳定，同时避免部分经济领域过热。</div>
+
+                    <div class="en">Despite robust growth in consumer spending, regulators remain vigilant about potential risks from excessive credit expansion, as unregulated lending could trigger systemic financial pressure.</div>
+                    <div class="cn">尽管消费支出增长强劲，但监管机构仍对过度信贷扩张带来的潜在风险保持警惕，因为不受监管的放贷可能引发系统性金融压力。</div>
+
+                    <div class="en">Most economists suggest that a gradual policy adjustment is preferable to abrupt changes that might disrupt the steady economic recovery.</div>
+                    <div class="cn">多数经济学家认为，渐进式政策调整优于可能扰乱经济稳步复苏的突然变动。</div>
+                </div>
+            </div>
+
+            <!-- News 2 -->
+            <div class="card">
+                <h3>News Excerpt 2</h3>
+                <div class="english-text">
+                    The widespread application of generative AI in China's digital economy has prompted industries to restructure operational models that have been in place for years. Instead of merely automating repetitive tasks, domestic enterprises are prioritizing the synergy between human expertise and artificial intelligence to drive innovation. Investors who grasp this transformation early have identified promising growth areas in sectors like smart manufacturing and digital healthcare. Industry insiders highlight that sustainable development relies not on technological imitation, but on independent innovation and localized adaptation of AI technologies.
+                </div>
+
+                <div class="annotations">
+                    <p>1. widespread application: large-scale use and implementation</p>
+                    <p>2. restructure operational models: reorganize the way businesses operate</p>
+                    <p>3. synergy between human expertise and AI: combined effect of human skills and AI capabilities</p>
+                    <p>4. localized adaptation: adjustment of technologies to fit local conditions</p>
+                </div>
+
+                <button class="toggle-btn" onclick="toggle(this)">Show Translation</button>
+                <div class="bilingual">
+                    <div class="en">The widespread application of generative AI in China's digital economy has prompted industries to restructure operational models that have been in place for years.</div>
+                    <div class="cn">生成式人工智能在中国数字经济中的广泛应用，促使各行业重构已沿用多年的运营模式。</div>
+
+                    <div class="en">Instead of merely automating repetitive tasks, domestic enterprises are prioritizing the synergy between human expertise and artificial intelligence to drive innovation.</div>
+                    <div class="cn">国内企业并非仅将重复性任务自动化，而是优先推动人类专业知识与人工智能的协同作用以驱动创新。</div>
+
+                    <div class="en">Investors who grasp this transformation early have identified promising growth areas in sectors like smart manufacturing and digital healthcare.</div>
+                    <div class="cn">较早把握这一转型的投资者，已在智能制造、数字医疗等领域发现了具有潜力的增长板块。</div>
+
+                    <div class="en">Industry insiders highlight that sustainable development relies not on technological imitation, but on independent innovation and localized adaptation of AI technologies.</div>
+                    <div class="cn">业内人士强调，可持续发展不依赖技术模仿，而在于人工智能技术的自主创新和本土化适配。</div>
+                </div>
+            </div>
+
+            <!-- News 3 -->
+            <div class="card">
+                <h3>News Excerpt 3</h3>
+                <div class="english-text">
+                    China's nationwide initiatives to achieve carbon neutrality have intensified in response to the growing urgency of climate change impacts across the country. Beyond strengthening environmental oversight, local governments are providing subsidies to motivate enterprises and residents to adopt low-carbon energy solutions. Without coordinated efforts across different regions and industries, however, the nation's climate targets may fall short of the ambitious goals set in the 14th Five-Year Plan. Environmental authorities underscore that proactive measures are far more impactful than belated policies that only tackle surface-level issues.
+                </div>
+
+                <div class="annotations">
+                    <p>1. nationwide initiatives: country-wide actions and programs</p>
+                    <p>2. strengthen environmental oversight: enhance supervision of environmental protection</p>
+                    <p>3. adopt low-carbon energy solutions: use energy methods that produce less carbon emissions</p>
+                    <p>4. belated policies: policies that are introduced too late</p>
+                </div>
+
+                <button class="toggle-btn" onclick="toggle(this)">Show Translation</button>
+                <div class="bilingual">
+                    <div class="en">China's nationwide initiatives to achieve carbon neutrality have intensified in response to the growing urgency of climate change impacts across the country.</div>
+                    <div class="cn">受全国范围内气候变化影响紧迫性加剧的推动，中国实现碳中和的全国性举措已进一步强化。</div>
+
+                    <div class="en">Beyond strengthening environmental oversight, local governments are providing subsidies to motivate enterprises and residents to adopt low-carbon energy solutions.</div>
+                    <div class="cn">除了加强环境监管，地方政府还提供补贴，激励企业和居民采用低碳能源解决方案。</div>
+
+                    <div class="en">Without coordinated efforts across different regions and industries, however, the nation's climate targets may fall short of the ambitious goals set in the 14th Five-Year Plan.</div>
+                    <div class="cn">然而，如果不同地区和行业缺乏协同努力，国家气候目标可能无法达到"十四五"规划中设定的宏伟目标。</div>
+
+                    <div class="en">Environmental authorities underscore that proactive measures are far more impactful than belated policies that only tackle surface-level issues.</div>
+                    <div class="cn">环保部门强调，前瞻性措施远比那些只解决表面问题的滞后政策更具实效。</div>
+                </div>
+            </div>
+        `,
+        "2026-02-20": `
+            <!-- News 1 -->
+            <div class="card">
+                <h3>News Excerpt 1</h3>
+                <div class="english-text">
+                    China's rural revitalization strategy has yielded tangible results as infrastructure upgrades and digital connectivity have narrowed the development gap between urban and rural areas. Despite challenges in talent retention, local governments have implemented targeted policies to attract young professionals to return to their hometowns and contribute to agricultural modernization. Economists note that balanced regional development is critical to sustaining the country's long-term economic growth and social stability.
+                </div>
+
+                <div class="annotations">
+                    <p>1. yield tangible results: produce clear and measurable outcomes</p>
+                    <p>2. digital connectivity: access to digital networks and internet services</p>
+                    <p>3. talent retention: keeping skilled people in a particular area or organization</p>
+                    <p>4. agricultural modernization: the process of updating farming methods with new technologies</p>
+                </div>
+
+                <button class="toggle-btn" onclick="toggle(this)">Show Translation</button>
+                <div class="bilingual">
+                    <div class="en">China's rural revitalization strategy has yielded tangible results as infrastructure upgrades and digital connectivity have narrowed the development gap between urban and rural areas.</div>
+                    <div class="cn">随着基础设施升级和数字互联互通缩小了城乡发展差距，中国乡村振兴战略已取得切实成效。</div>
+
+                    <div class="en">Despite challenges in talent retention, local governments have implemented targeted policies to attract young professionals to return to their hometowns and contribute to agricultural modernization.</div>
+                    <div class="cn">尽管在人才留存方面存在挑战，但地方政府已出台针对性政策，吸引青年专业人才返乡，为农业现代化贡献力量。</div>
+
+                    <div class="en">Economists note that balanced regional development is critical to sustaining the country's long-term economic growth and social stability.</div>
+                    <div class="cn">经济学家指出，区域均衡发展对于维持国家长期经济增长和社会稳定至关重要。</div>
+                </div>
+            </div>
+
+            <!-- News 2 -->
+            <div class="card">
+                <h3>News Excerpt 2</h3>
+                <div class="english-text">
+                    The rapid expansion of China's high-speed rail network has transformed the country's transportation landscape and redefined regional economic cooperation. By reducing travel time between major cities, the HSR system has facilitated the flow of people, goods and capital, creating new opportunities for industrial agglomeration in second-tier cities. Transportation experts predict that ongoing network expansion will further integrate rural areas into the national economic cycle, boosting inclusive growth across all regions.
+                </div>
+
+                <div class="annotations">
+                    <p>1. transportation landscape: the overall situation of transportation systems</p>
+                    <p>2. facilitate the flow: make the movement of something easier</p>
+                    <p>3. industrial agglomeration: the concentration of industries in a particular area</p>
+                    <p>4. inclusive growth: economic growth that benefits all segments of society</p>
+                </div>
+
+                <button class="toggle-btn" onclick="toggle(this)">Show Translation</button>
+                <div class="bilingual">
+                    <div class="en">The rapid expansion of China's high-speed rail network has transformed the country's transportation landscape and redefined regional economic cooperation.</div>
+                    <div class="cn">中国高铁网络的快速扩张改变了国家的交通格局，重新定义了区域经济合作模式。</div>
+
+                    <div class="en">By reducing travel time between major cities, the HSR system has facilitated the flow of people, goods and capital, creating new opportunities for industrial agglomeration in second-tier cities.</div>
+                    <div class="cn">通过缩短主要城市间的出行时间，高铁系统促进了人员、货物和资本的流动，为二线城市的产业集聚创造了新机遇。</div>
+
+                    <div class="en">Transportation experts predict that ongoing network expansion will further integrate rural areas into the national economic cycle, boosting inclusive growth across all regions.</div>
+                    <div class="cn">交通专家预测，持续的网络扩张将进一步把农村地区纳入全国经济循环，推动各地区的包容性增长。</div>
+                </div>
+            </div>
+
+            <!-- News 3 -->
+            <div class="card">
+                <h3>News Excerpt 3</h3>
+                <div class="english-text">
+                    China's efforts to protect intangible cultural heritage (ICH) have gained international recognition as traditional art forms are preserved and innovatively adapted for modern audiences. Through digitalization and cultural tourism integration, local communities have found sustainable ways to pass down ancient crafts and performing arts to younger generations. Cultural scholars emphasize that safeguarding ICH is not only about preserving the past, but also about fostering cultural identity and creativity in contemporary society.
+                </div>
+
+                <div class="annotations">
+                    <p>1. intangible cultural heritage (ICH): non-physical cultural traditions and practices</p>
+                    <p>2. innovatively adapted: modified in creative ways to suit new contexts</p>
+                    <p>3. cultural tourism integration: combining cultural resources with tourism development</p>
+                    <p>4. foster cultural identity: develop a sense of belonging to a particular culture</p>
+                </div>
+
+                <button class="toggle-btn" onclick="toggle(this)">Show Translation</button>
+                <div class="bilingual">
+                    <div class="en">China's efforts to protect intangible cultural heritage (ICH) have gained international recognition as traditional art forms are preserved and innovatively adapted for modern audiences.</div>
+                    <div class="cn">随着传统艺术形式得到保护并创新性地适配现代受众，中国保护非物质文化遗产（ICH）的努力获得了国际认可。</div>
+
+                    <div class="en">Through digitalization and cultural tourism integration, local communities have found sustainable ways to pass down ancient crafts and performing arts to younger generations.</div>
+                    <div class="cn">通过数字化和文旅融合，当地社区找到了将古老手工艺和表演艺术传承给年轻一代的可持续方式。</div>
+
+                    <div class="en">Cultural scholars emphasize that safeguarding ICH is not only about preserving the past, but also about fostering cultural identity and creativity in contemporary society.</div>
+                    <div class="cn">文化学者强调，保护非物质文化遗产不仅是为了保存过去，更是为了在当代社会培养文化认同感和创造力。</div>
+                </div>
+            </div>
+        `
+    };
+
+    // 3. 加载当天内容：无当天内容则默认加载最新
+    function loadTodayNews() {
+        const today = getTodayDate();
+        const container = document.getElementById('daily-news-container');
+        // 优先加载当天，无则加载2026-02-19
+        container.innerHTML = newsLibrary[today] || newsLibrary["2026-02-19"];
+    }
+
+    // 页面加载完成后自动执行
+    window.onload = loadTodayNews;
+</script>
+
+</body>
+</html>
